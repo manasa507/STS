@@ -193,13 +193,13 @@ if(isset($_POST["name"])){
                     <form action="<?php $_PHP_SELF ?>" method="POST">
                       <div class="row">
                         <div class="col-md-12">
-                            <input type="text" name="title" id="title" placeholder="Title*">
+                            <input type="text" name="title" id="title" placeholder="Title*" required="required">
                         </div>
                       </div>
 
                       <div class="row">
                         <div class="col-md-12">
-                            <select required="required" class="form-control" id="deptSel" name="deptSel[]">
+                            <select class="form-control" id="deptSel" name="deptSel[]" required="required">
                                   <option value="0"> --Select Department-- </option>
                                   <?= $select ?>
                               </select>
