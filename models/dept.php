@@ -4,7 +4,6 @@
    	@ desc Select class for all CRUD functionalities performs here.. 
     @ PHP version: 7.1.15
     @ date: 11-06-2018
-    @ author: Saimanasa
     **/
 	require_once 'includes/dbconnect.php';
 	require_once 'models/modelwrapper.php';
@@ -52,7 +51,7 @@
 		/**
 		@ desc update function for update user formData.
 		@ param  STRING $formData 
-		@ param  STRING $id  
+		@ param  int $id  
 		@ return STRING $response
 		**/
 		function update($formData,$id,$pager)
@@ -76,28 +75,32 @@
         	return $query;
         }
 
-//@desc selects multiple data from database
- 
-public function getDept()
-    {
-        $dbConnectObject= new DatabaseConnection();
-        $dbConnectObject->conn;
+		/*
+        @desc select department
+		@returns array  $select 
+		*/
+		 
+		public function getDept()
+		    {
+		        $dbConnectObject= new DatabaseConnection();
+		        $dbConnectObject->conn;
 
-        $sql = "SELECT id, name FROM dept";
-        $result = mysqli_query($dbConnectObject->conn, $sql);
-        $select = "";
-        if (mysqli_num_rows($result) > 0) 
-        {
-            while($row = mysqli_fetch_assoc($result)) {
-                $select.='<option value="'.$row['id'].'">'.$row['name'].'</option>';
-                $x = $row['id'];
-            }
-        } 
-        else 
-        {
-            echo  mysqli_error($dbConnectObject->conn);;
-        }
-        return $select;
-    }
-}
+		        $sql = "SELECT id, name FROM dept";
+		        $result = mysqli_query($dbConnectObject->conn, $sql);
+		        $select = "";
+		        if (mysqli_num_rows($result) > 0) 
+		        {
+		            while($row = mysqli_fetch_assoc($result)) {
+		                $select.='<option value="'.$row['id'].'">'.$row['name'].'</option>';
+		                $x = $row['id'];
+		            }
+		        } 
+		        else 
+		        {
+		            echo  mysqli_error($dbConnectObject->conn);;
+		        }
+		        return $select;
+		    }
+	}
+
 ?>

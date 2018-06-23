@@ -73,7 +73,7 @@
         </div>
 
         <!--logo start-->
-        <a href="#" class="logo">STS <span class="lite">Admin</span></a>
+        <a href="#" class="logo">SUPPORT TICKET SYSTEM</a>
         <!--logo end-->
         
         <div class="top-nav notification-row">
