@@ -6,6 +6,7 @@
     @ date: 11-06-2018
     @ author: Saimanasa
     **/
+    session_start();
     require_once 'includes/connection.php';
 	class ModelWrapper
 	{
@@ -17,7 +18,7 @@
 		**/
 		public function selectAll($tableName,$columnName){
 
-			$dbConnectObject = new DatabaseConnection('localhost','root','Credencys','sts');
+			$dbConnectObject = new DatabaseConnection('localhost','root','123','sts');
 			$dbConnectObject->conn;
 			$sql = mysqli_query($dbConnectObject->conn, "SELECT $columnName FROM $tableName");
 			return $sql;
@@ -31,7 +32,7 @@
 		**/
 		public function selectById($tableName,$columnName,$partRecrd,$id){
 
-			$dbConnectObject = new DatabaseConnection('localhost','root','Credencys','sts');
+			$dbConnectObject = new DatabaseConnection('localhost','root','123','sts');
 			$dbConnectObject->conn;
 		
 			$sql = mysqli_query($dbConnectObject->conn, "SELECT $columnName FROM $tableName where $partRecrd = '$id'");
@@ -47,7 +48,7 @@
 		@ return STRING $deleteQuery
 		**/	
 		public function delete($table,$id,$pager){
-			$dbConnectObject= new DatabaseConnection('localhost','root','Credencys','sts');
+			$dbConnectObject= new DatabaseConnection('localhost','root','123','sts');
 			$dbConnectObject->conn;
      		//SQL query for deletion.
 			$deleteQuery = mysqli_query($dbConnectObject->conn,"DELETE from $table where id=$id");
@@ -67,7 +68,7 @@
 		function update($tableName, $pager ,$formData, $whereClause='$id')
 		{
 
-			$dbConnectObject= new DatabaseConnection('localhost','root','Credencys','sts');
+			$dbConnectObject= new DatabaseConnection('localhost','root','123','sts');
 			$dbConnectObject->conn;
 		    // check for optional where clause
 		    $whereSQL = '';
@@ -95,7 +96,7 @@
 		    // append the where statement
 		    $sql .= $whereSQL;
 		    $query = mysqli_query($dbConnectObject->conn,$sql);
-		    if($query === TRUE){
+		    if($query == TRUE){
 			    header("location:$pager");
 			}
 			// run and return the query result
@@ -109,7 +110,7 @@
 		**/
 		function insert($tableName, $formData)
 		{
-			$dbConnectObject= new DatabaseConnection('localhost','root','Credencys','sts');
+			$dbConnectObject= new DatabaseConnection('localhost','root','123','sts');
 			$dbConnectObject->conn;
 		    // retrieve the keys of the array (column titles)
 		    $fields = array_keys($formData);
@@ -151,7 +152,7 @@
         **/
         public function fetchAssoc($deptObj,$rowsObj)
         {
-            $dbConnectObject= new DatabaseConnection('localhost','root','Credencys','sts');
+            $dbConnectObject= new DatabaseConnection('localhost','root','123','sts');
             $dbConnectObject->conn;
 			$select ="";
             if ($rowsObj > 0) 

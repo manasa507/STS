@@ -28,7 +28,7 @@
       require_once 'models/categories.php';
       require_once 'models/modelwrapper.php';
    
-
+      $pager = "tickets.php";
       $ticketObj = new Ticket();
       $deptObj = new Dept();
       $categoryObj = new Categories();
@@ -54,7 +54,7 @@
                $changeStatus = 0;
             }
           $updateData = array("isActive"=>$changeStatus);
-          $update = $ticketObj->update($updateData,$id);
+          $update = $ticketObj->update($updateData,$id,$pager);
         }
       }
       // for update tickets issues
@@ -64,7 +64,7 @@
         $description = $_POST['description'];
         $updateTicket = array("subject"=>$subject,
                               "description"=>$description);
-        $updateDept = $ticketObj->update($updateTicket,$id);
+        $updateDept = $ticketObj->update($updateTicket,$id,$pager);
       }
       // fetch all department records
         $deptFields='id,name';

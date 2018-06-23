@@ -1,17 +1,12 @@
 <?php
-
+// echo "mmm";
+// die;
 require_once('models/ticket.php');
 $tableData = "";
 $ticketObject = new Ticket();
 $tableData = $ticketObject->getTicket();
-
-
-
-// include_once('models/option.php');
 require_once('models/dept.php');
 require_once('models/categories.php');
-// // include_once('models/addticket.php');
-
 $deptObj = new Dept();
 $select = $deptObj->getDept();
 
@@ -69,10 +64,16 @@ if(isset($_POST["Submit"]))
     if($check == true)
     {
       $id = $_SESSION["id"];
-      
       $ticketObject = new Ticket();
+      $addData = array("subject"=>$title,
+                        "deptId"=>$deptSelectedOption,
+                        "categoryId"=>$catSelectedOption, 
+                        "description"=>$description, 
+                        "createdBy"=>$id, 
+                        "updatedBy"=>$id );
+       $ticketStatus = $ticketObject->insert($addData);
       
-      $ticketStatus = $ticketObject->addTicket($title, $deptSelectedOption, $catSelectedOption, $description, $id, $id);
+
       if($ticketStatus == true)
       {
         // $statusMsg = "Ticket Added successfully";
@@ -85,8 +86,9 @@ if(isset($_POST["Submit"]))
 if(isset($_POST["name"])){
 
   $ticket = $_POST["name"];
-
-  $updateStatus = $ticketObject->updateTicket($ticket);
+  $ticketData = array("isActive"=>0);
+  $updateStatus = $ticketObject->update($ticketData,$ticket,"userhome.php");
+  //$updateStatus = $ticketObject->updateTicket($ticket);
   if($updateStatus = true)
   {
     header("Location:userhome.php");
@@ -110,52 +112,44 @@ if(isset($_POST["name"])){
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-
-
-
-	<link rel="stylesheet" type="text/css" href="assets/css/userhome.css">
-
-
+    <link rel="stylesheet" type="text/css" href="assets/css/userhome.css">
 </head>
 <body>
-
-	
-	<div class="header">
-	<nav class="navbar navbar-expand-lg bg-dark navbar-dark ">
-  		<a class="navbar-brand" href="https://www.credencys.com/">Credencys</a>
-  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    		
-  		</button>
-  		<div class="collapse navbar-collapse " id="collapsibleNavbar">
-          <ul class="nav navbar-nav mr-auto"></ul>
-          <ul class="navbar-nav ">
-            	<li class="nav-item">
-                <a class="nav-link" href="userhome.php">Home</a>
-            	</li>
-    			    <li class="nav-item">
-    			    	<a class="nav-link" href="#">News</a>
-    			    </li>
-          		<li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-          		</li>
-              <li class="nav-item ">
-                
-                <div class="dropdown">
-                  <a class="nav-link " data-toggle="dropdown" href="#"><i class="fa fa-user-circle fa-lg" ></i></a>
+  <div class="header">
+  	<nav class="navbar navbar-expand-lg bg-dark navbar-dark ">
+    		<a class="navbar-brand" href="https://www.credencys.com/">Credencys</a>
+    		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      		
+    		</button>
+    		<div class="collapse navbar-collapse " id="collapsibleNavbar">
+            <ul class="nav navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav ">
+              	<li class="nav-item">
+                  <a class="nav-link" href="userhome.php">Home</a>
+              	</li>
+      			    <li class="nav-item">
+      			    	<a class="nav-link" href="#">News</a>
+      			    </li>
+            		<li class="nav-item">
+                  <a class="nav-link" href="#">About</a>
+            		</li>
+                <li class="nav-item ">
                   
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <i class="fa fa-pencil "> <a href="editprofile.php">Profile </a> </i>
-                    <hr>
-                    <i class="fa fa-sign-out "> <a href="userlogout.php"> Logout </a> </i>
+                  <div class="dropdown">
+                    <a class="nav-link " data-toggle="dropdown" href="#"><i class="fa fa-user-circle fa-lg" ></i></a>
                     
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <i class="fa fa-pencil "> <a href="editprofile.php">Profile </a> </i>
+                      <hr>
+                      <i class="fa fa-sign-out "> <a href="userlogout.php"> Logout </a> </i>
+                      
+                    </div>
                   </div>
-                </div>
 
-              </li>   
-    		  </ul>
-  		</div>  
-	</nav>
+                </li>   
+      		  </ul>
+    		</div>  
+	  </nav>
   </div>
 
 
@@ -284,8 +278,5 @@ if(isset($_POST["name"])){
 <script src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 <script src="assets/js/tabletest.js"></script>
-
-		
-
 </body>
 </html>

@@ -26,6 +26,7 @@
       require_once 'includes/connection.php';
       require 'models/dept.php';
       require_once 'models/modelwrapper.php';
+      $pager = "deptinfo.php";
       $deptObj = new Dept();
       $modelObj = new ModelWrapper();
       $allUsers = $deptObj->selectAll();
@@ -39,7 +40,7 @@
         $name = $_POST['dname'];
         $fieldName = 'name';
         $deptData = array("name"=>$name);
-        $updateDept = $deptObj->update($deptData,$id);
+        $updateDept = $deptObj->update($deptData,$id,$pager);
        }
       // Fetching Values from URL.
        if (isset($_POST['name1'])) {

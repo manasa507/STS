@@ -30,7 +30,7 @@
         $userObj = new User();
         $modelObj = new ModelWrapper();
         $allRecords = $userObj->selectById("role","user");
-              
+        $pager = "users.php";     
         //Delete particular record by id.
         if (isset($_GET['delId'])) {
           $id = $_GET['delId'];
@@ -56,7 +56,7 @@
                $changeStatus = 0;
             }
             $statusData = array("isActive"=>$changeStatus);
-            $update = $userObj->update($statusData, $id);
+            $update = $userObj->update($statusData, $id,$pager);
            
           }
         }
@@ -69,7 +69,7 @@
           $userData = array("name"=>$name,
                             "email"=>$email,
                             "mobile"=>$mobile);
-          $updateDept = $userObj->update($userData, $id);
+          $updateDept = $userObj->update($userData, $id,$pager);
 
         }
       ?>

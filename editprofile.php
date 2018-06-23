@@ -6,20 +6,23 @@
     */
     session_start();
     require_once 'includes/dbconnect.php';
-    require_once 'upload.php';
+    require_once 'models/user.php';
+    require_once 'models/modelwrapper.php';
     $msg = '';
     $email = $_SESSION["email"];
     $userObj = new User();
+    $wrapperObj = new ModelWrapper();
     // fetch particular usrer information from user table
-    $sql = $userObj->selectById($email);
-    $rows = $userObj->fetchArray($sql);
+    $fetchData = $userObj->selectById("email",$email);
+    $rows = $wrapperObj->fetchArray($fetchData);
+    $id = $rows['id'];
     $name =  $rows['name'];
     $email =  $rows['email'];
     $mobile =  $rows['mobile'];
     $password =  $rows['password'];
     $picture =  $rows['image'];
     $_SESSION['$picture'] = $picture;
-    $dp = $_SESSION['$image'];
+    $dp = $_SESSION['$picture'];
 
     if (isset($_POST['submit']))
     {
@@ -27,80 +30,74 @@
         $oldPass = $_POST['password'];
         $newPassword = $_POST['newPassword'];
         $re_pass = $_POST['re_password'];
-     if(isset($_FILES["fileToUpload"]))
-    {
-      $target_dir = "uploads/";
-      $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-      $uploadOk = 1;
-      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-      // Check if image file is a actual image or fake image
-      if(isset($_POST["submit"])) 
-      {
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if($check !== false) 
+        if(isset($_FILES["fileToUpload"]))
         {
-          echo "File is an image - " . $check["mime"] . ".";
-          $uploadOk = 1;
-        } 
-        else 
-        {
-          echo "File is not an image.";
-          $uploadOk = 0;
-        }
-      }
-
-      // Allow certain file formats
-      if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-      && $imageFileType != "gif" ) 
-      {
-        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-      }
-      // Check if $uploadOk is set to 0 by an error
-      if ($uploadOk == 0) 
-      {
-        echo "Sorry, your file was not uploaded.";
-      // if everything is ok, try to upload file
-      } 
-      else 
-      {
-        if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
-        {
-          echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-        } 
-        else 
-        {
-          echo "Sorry, there was an error uploading your file.";
-        }
-      }
-      if(isset($_FILES["fileToUpload"]))  
-      {
-        $fileToUpload = addslashes(file_get_contents($_FILES['fileToUpload']['tmp_name']));  
-        $image = addslashes($_FILES['fileToUpload']['name']); 
-
-       
-    }
-    $imgField = 'image';
-                if(!empty($image))
+            $target_dir = "uploads/";
+            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            // Check if image file is a actual image or fake image
+            if(isset($_POST["submit"])) 
+            {
+                $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                if($check !== false) 
                 {
-                    $userObj->update($imgField,$image,$email); 
-                    echo "<script>alert('Update Sucessfully'); window.location='editprofile.php'</script>";  
-                }
-                else{
+                    echo "File is an image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } 
+                else 
                 {
-                    $userObj->update($imgField,$dp,$email); 
-                    echo "<script>alert('Update Sucessfully'); window.location='editprofile.php'</script>";  
+                    echo "File is not an image.";
+                    $uploadOk = 0;
                 }
             }
 
-        $rows = $userObj->numRows($sql);
-    
-        if ($rows != 0) 
-        {
+            // Allow certain file formats
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif" ) 
+            {
+                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                $uploadOk = 0;
+            }
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) 
+            {
+                echo "Sorry, your file was not uploaded.";
+                // if everything is ok, try to upload file
+            } 
+            else 
+            {
+                if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
+                {
+                    echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+                } 
+                else 
+                {
+                    echo "Sorry, there was an error uploading your file.";
+                }
+            }
+            if(isset($_FILES["fileToUpload"]))  
+            {
+                $fileToUpload = addslashes(file_get_contents($_FILES['fileToUpload']['tmp_name']));  
+                $image = addslashes($_FILES['fileToUpload']['name']); 
+            }
             if(!empty($newPassword || $mobileNo || $image))
             {  
-                if($password == $oldPass){}
+                $imgField = 'image';
+                if($image!= null)
+                {
+                    $imgData = array("image"=>$image);
+                    $updateRecrd = $userObj->update($imgData,$id,"editprofile.php"); 
+                    echo "<script>alert('Update Sucessfully'); window.location='editprofile.php'</script>";  
+                }
                 else{
+                    $dpData = array("image"=>$dp);
+                    $updateRecrd = $userObj->update($dpData,$id,"editprofile.php"); 
+                    echo "<script>alert('Update Sucessfully'); window.location='editprofile.php'</script>";  
+                }
+                if($password === $oldPass){}
+                else
+                {
                     echo "<script>alert('Please Enter Valid Old Password'); window.location='editprofile.php'</script>";
                 }
                 if(!empty($newPassword))
@@ -108,8 +105,8 @@
                     if(preg_match("/^(?=.*\d)(?=.*[a-zA-Z]).{6,10}$/",$newPassword))
                     {
                         if ($newPassword == $re_pass){
-                            $pswrdField = 'password';
-                            $updateRecrd = $userObj->update($pswrdField,$newPassword,$email);
+                            $passData = array("password"=>$newPassword);
+                            $updateRecrd = $userObj->update($passData,$id,"editprofile.php");
                             echo "<script>alert('Update Sucessfully'); window.location='editprofile.php'</script>";
                         }
                         else
@@ -122,30 +119,29 @@
                      echo "<script>alert('should contain alphabets,numbers and min of 6 charaters'); window.location='editprofile.php'</script>";
                     }
                 }
-                
+                else{
+                    echo "<script>alert('Profile Not Updated'); window.location='editprofile.php'</script>";
                 }
-                if($mobileNo != $mobile){
+                if($mobileNo != $mobile)
+                {
                     if (preg_match("/^(?=.*\d).{10}$/", $mobileNo))
                     {
-                        $mobileField = 'mobile';
-                        $updateRecrd = $userObj->update($mobileField,$mobileNo,$email);
+                        $mobileData = array("mobile"=>$mobileNo);
+                        $updateRecrd = $userObj->update($mobileData,$id,"editprofile.php");
                         echo "<script>alert('Updafghhte Sucessfully'); window.location='editprofile.php'</script>";
                     }
                     else{
                         echo "<script>alert('Enter 10 digit mobile no'); window.location='editprofile.php'</script>";
                     }
                 }
-                else{
-                    echo "<script>alert('Profile Not Updated'); window.location='editprofile.php'</script>";
-                }
+                
             }
             else
             {
-                echo "<script>alert('profile not updated'); window.location='editprofile.php'</script>";
+                echo "<script>alert('Profile Not Updated'); window.location='editprofile.php'</script>";
             }
         }
-    }
-    
+    }   
 ?>
 <!DOCTYPE html>
     <head>
@@ -204,7 +200,7 @@
                                              
                                               if($files[$i] == "uploads/".$picture)
                                                 {
-                                                echo '<img src="'.$num.'" alt="random image">'."&nbsp;&nbsp;";
+                                                echo '<img src="'.$num.'" alt="random image" style="width:45%;height:200px;">'."&nbsp;&nbsp;";
                                                 }
                                             }
                                         ?>  

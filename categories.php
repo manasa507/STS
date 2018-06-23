@@ -38,7 +38,7 @@
         $id = $_POST['cid'];
         $name = $_POST['cname'];
         $categoryData = array("name"=>$name);
-        $updateDept = $categoryObj->update($categoryData,$id);
+        $updateDept = $categoryObj->update($categoryData,$id,$pager);
       }
       // fetch all department records
         $deptObj = $deptObj->selectAll(); 

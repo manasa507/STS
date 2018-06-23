@@ -8,8 +8,8 @@
 
 	require_once 'includes/dbconnect.php';
 	require_once 'includes/connection.php';
-	session_start();
 	require_once 'models/modelwrapper.php';
+	session_start();
 	
 	class User 
 	{
@@ -65,12 +65,11 @@
 		@ param  STRING $id  
 		@ return STRING $response
 		**/
-		public function update( $formData, $id)
+		public function update($formData,$id,$pager)
 		{
 			$tableName = 'user';
-			$pager = 'users.php';
 			$wrapperObj = new ModelWrapper();
-        	$response = $wrapperObj->update( $tableName,$pager,$formData,  "WHERE id = '$id'");
+        	$response = $wrapperObj->update($tableName,$pager,$formData,  "WHERE id = '$id'");
 		    // run and return the query result
 		    return $response;
 		}
@@ -182,11 +181,11 @@
 	     	$dbConnectObject= new DatabaseConnection();
 			$dbConnectObject->conn;
 	     	$sql="SELECT id,email FROM user where email='$email' AND role='user' ";
+
 	      	$result = mysqli_query($dbConnectObject->conn,$sql);
 	      	if ($result->num_rows == 1 )
 	      	{
-
-		          $row=mysqli_fetch_array($result);
+	      		  $row=mysqli_fetch_array($result);
 		          $id=$row['id'];
 		          $emailId=$row["email"];
 		          $_SESSION['email']=$emailId;
@@ -196,7 +195,7 @@
 		          $result = mysqli_query($dbConnectObject->conn,$sql);
 		          if($result == TRUE)
 		          {
-		            $_SESSION['emailMsg'] = "http://192.168.11.157/sts/resetpassword.php?userId=$id";
+		            $_SESSION['emailMsg'] = "http://192.168.1.145/sts/resetpassword.php?userId=$id";
 		            header('location:mail.php');
 		          }
          
@@ -221,8 +220,9 @@
 		{
 		    $dbConnectObject= new DatabaseConnection();
 			$dbConnectObject->conn;	
-		    $sql = "SELECT password,name from user where id = '$id' ";
-		    $result = mysqli_query($dbConnectObject->conn,$sql);
+			$wrapperObj = new ModelWrapper();
+        	$result = $wrapperObj->selectById("user","*","id",$id);
+        	
 		    if($result == TRUE)
 		    {
 		        $num_rows=mysqli_num_rows($result); 
@@ -253,34 +253,5 @@
 		    }
 		}
 
-		public function insertDataFromForm($userName, $emailId, $password, $mobileNumber,$Gender, $deptId,$image)
-		{
-
-			$dbConnectObject= new DatabaseConnection();
-			$dbConnectObject->conn;
-
-			$sql = "INSERT INTO user (name,email,password,mobile,gender,deptId,image) VALUES ('$userName','$emailId', '$password','$mobileNumber','$Gender','$deptId','$image')";
-
-			
-			if (mysqli_query($dbConnectObject->conn, $sql)) 
-			{	
-				$successMessage = "Registered Successfully" ;
-			}
-			else 
-			{
-				$x=mysqli_error($dbConnectObject->conn);
-				if (strpos($x, $emailId) !== false)
-				{
-					$successMessage = "Already registered with ".$emailId;
-				}
-				if (strpos($x, $mobileNumber) !== false) 
-				{
-					$successMessage = "Already registered with ".$mobileNumber;
-				}
-			}
-			return $successMessage;
-		}
-
-		
-    }
+ }
 ?>

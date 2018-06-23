@@ -6,9 +6,7 @@
     @ date: 11-06-2018
     @ author: Saimanasa
     **/
-
 	require_once 'includes/dbconnect.php';
-	
 	require_once 'models/modelwrapper.php';
 	class Dept 
 	{	
@@ -57,10 +55,9 @@
 		@ param  STRING $id  
 		@ return STRING $response
 		**/
-		function update($formData,$id)
+		function update($formData,$id,$pager)
 		{
 			$tableName = 'dept';
-			$pager = 'deptinfo.php';
 			$wrapperObj = new ModelWrapper();
         	$query = $wrapperObj->update($tableName,$pager,$formData,"WHERE id = '$id'");
         	// run and return the query result
@@ -102,8 +99,5 @@ public function getDept()
         }
         return $select;
     }
-
-
-       
-	}
+}
 ?>

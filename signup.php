@@ -170,11 +170,6 @@ if(isset($_POST["Submit"]))
     		}
 		}
 
-
-
-
-
-
 		if($check == true)
 		{
 			$id = $_SESSION["id"] ;
@@ -182,8 +177,15 @@ if(isset($_POST["Submit"]))
 
 					
 			// desc users object calling for insertion of data when all fields are filled
-			
-			$successMessage = $UsersObject->insertDataFromForm($userName, $emailId,$password, $mobileNumber,$Gender, $deptSelectedOption, $image_name);
+			$addData = array("name"=>$userName,
+							"email"=>$emailId,
+							"password"=>$password,
+							"mobile"=>$mobileNumber,
+							"gender"=>$Gender,
+							"deptId"=>$deptSelectedOption,
+							"image"=>$image_name);
+			$successMessage = $UsersObject->insert($addData);
+			//$successMessage = $UsersObject->insertDataFromForm($userName, $emailId,$password, $mobileNumber,$Gender, $deptSelectedOption, $image_name);
 			//desc after insertion of data making the fields empty
 			if($successMessage == "Registered Successfully" )
 			{

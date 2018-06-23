@@ -54,10 +54,9 @@
 		@ param  STRING $id  
 		@ return STRING $response
 		**/
-		function update($formData,$id)
+		function update($formData,$id,$pager)
 		{
 			$tableName = 'categories';
-			$pager = 'categories.php';
 			$wrapperObj = new ModelWrapper();
         	$query = $wrapperObj->update($tableName,$pager,$formData,"WHERE id = '$id'");
         	// run and return the query result
