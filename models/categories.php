@@ -4,7 +4,6 @@
    	@ desc Select class for all CRUD functionalities performs here.. 
     @ PHP version: 7.1.15
     @ date: 11-06-2018
-    @ author: Saimanasa
     **/
 	require_once 'includes/dbconnect.php';
 	require_once 'models/modelwrapper.php';
@@ -51,7 +50,7 @@
 		/**
 		@ desc update function for update user formData.
 		@ param  STRING $formData 
-		@ param  STRING $id  
+		@ param  int $id  
 		@ return STRING $response
 		**/
 		function update($formData,$id)
@@ -68,7 +67,7 @@
 		@ param  STRING $formData 
 		@ return STRING $response
 		**/
-		function insert($formData)
+		public function insert($formData)
 		{
 			$tableName = 'categories';
 			$wrapperObj = new ModelWrapper();
@@ -76,55 +75,60 @@
         	return $query;
         }
 
-        //@desc selects multiple data from database
-//@retruns the seleted data into an $catarray array 
-    public function selectCat()
-	{
-		$dbConnectObject= new DatabaseConnection();
-		$sql = "SELECT name FROM categories ";
-		$result = mysqli_query($dbConnectObject->conn, $sql);
-		
-		if (mysqli_num_rows($result) > 0) 
+        /*
+        @desc select categories based on departments
+		@returns array  $catarray 
+		*/
+	    public function selectCat()
 		{
-    	// output data of each row
-			$i =0;
-    		while($row = mysqli_fetch_assoc($result)) 
-    		{	
-    			$catArray[i] = $row["name"];
-        		$i++;
-    		}
-    		
+			$dbConnectObject= new DatabaseConnection();
+			$sql = "SELECT name FROM categories ";
+			$result = mysqli_query($dbConnectObject->conn, $sql);
+			
+			if (mysqli_num_rows($result) > 0) 
+			{
+				$i =0;
+	    		while($row = mysqli_fetch_assoc($result)) 
+	    		{	
+	    			$catArray[i] = $row["name"];
+	        		$i++;
+	    		}
+	    		
+			}
+			else
+			{
+	    		echo "0 results";
+			}
+
+			mysqli_close($dbConnectObject->conn);
+			return $catArray;
 		}
-		else
-		{
-    		echo "0 results";
-		}
 
-		mysqli_close($dbConnectObject->conn);
-		return $catArray;
-	}
+		/*
+        @desc selects categories
+		@returns array  $selects 
+		*/
+		public function getCat()
+	    {
+	        $dbConnectObject= new DatabaseConnection();
+	        $dbConnectObject->conn;
 
-	public function getCat()
-    {
-        $dbConnectObject= new DatabaseConnection();
-        $dbConnectObject->conn;
+	        $sql = "SELECT id, deptId, name FROM categories";
+	        $result = mysqli_query($dbConnectObject->conn, $sql);
+	        $selects = "";
+	        if (mysqli_num_rows($result) > 0) 
+	        {
+	            
+	            while($row = mysqli_fetch_assoc($result)) {
+	                $selects.='<option value="'.$row['id'].'" data-val="'.$row['deptId'].'" >'.$row['name'].'</option>';
+	            }
 
-        $sql = "SELECT id, deptId, name FROM categories";
-        $result = mysqli_query($dbConnectObject->conn, $sql);
-        $selects = "";
-        if (mysqli_num_rows($result) > 0) 
-        {
-            
-            while($row = mysqli_fetch_assoc($result)) {
-                $selects.='<option value="'.$row['id'].'" data-val="'.$row['deptId'].'" >'.$row['name'].'</option>';
-            }
-
-       } 
-        else 
-        {
-            echo  mysqli_error($dbConnectObject->conn);;
-        }
-        return $selects;
-    }
+	       } 
+	        else 
+	        {
+	            echo  mysqli_error($dbConnectObject->conn);;
+	        }
+	        return $selects;
+	    }
 	}
 ?>

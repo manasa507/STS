@@ -4,7 +4,6 @@
    	@ desc Ticket class for all CRUD functionalities performs here.. 
     @ PHP version: 7.1.15
     @ date: 11-06-2018
-    @ author: Saimanasa
     **/
     require_once 'includes/connection.php';
 	class ModelWrapper
@@ -27,6 +26,7 @@
 		@ param STRING  $tableName 
 		@ param  STRING $columnName
 		@ param  STRING $partRecrd is a field name
+		@ param  INT $id
 		@ return STRING $sql
 		**/
 		public function selectById($tableName,$columnName,$partRecrd,$id){
