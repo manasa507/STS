@@ -12,6 +12,7 @@
 	class User 
 	{
 		/**
+		@author: Saimanasa
 		@ desc selectAll function for fetch all no.of records in a particular table. 
 		@ return STRING $allRecords
 		**/
@@ -24,6 +25,7 @@
 			
 		}
 		/**
+		@author: Saimanasa
 		@ desc selectById function for fetch all no.of records in a table.
 		@ param  STRING $partRecrd 
 		@ param  int $id
@@ -50,6 +52,7 @@
         	return $response;
 		}
 		/**
+		@author: Saimanasa
 		@ desc update function for update user formData.
 		@ param  STRING $formData 
 		@ param  int $id  
@@ -66,6 +69,7 @@
 		}
 
  		/**
+ 		@author: Saimanasa
 		@ desc insert function for insert users into users table. 
 		@ param  STRING $formData  
 		@ return STRING $successMessage
