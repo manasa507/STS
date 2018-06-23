@@ -272,7 +272,7 @@ if(isset($_POST["name"])){
         <a class="footerIcon" href="https://twitter.com/Credencys" title="Twitter"><i class="fa fa-twitter"></i></a>
         <a class="footerIcon" href="https://www.facebook.com/credencys/" title="Facebook"><i class="fa fa-facebook"></i></a>
         <a class="footerIcon" href="https://www.linkedin.com/company/credencys" title="linkedin"><i class="fa fa-linkedin"></i></a>
-        <a class="footerIcon" href="https://www.linkedin.com/company/credencys" title="linkedin"><i class="fa fa-linkedin"></i></a>
+        
        
       </div>
 
