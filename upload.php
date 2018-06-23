@@ -35,6 +35,7 @@
 			$response =mysqli_fetch_array($query);
 			return $response;
 		}
+
 		public function update($field,$value,$email){
 			$dbConnectObject= new DatabaseConnection();
 			$dbConnectObject->conn;

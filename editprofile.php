@@ -17,7 +17,7 @@
     $email =  $rows['email'];
     $mobile =  $rows['mobile'];
     $password =  $rows['password'];
-    $picture =  $rows['picture'];
+    $picture =  $rows['image'];
     $_SESSION['$picture'] = $picture;
     $dp = $_SESSION['$image'];
 
@@ -77,6 +77,7 @@
       {
         $fileToUpload = addslashes(file_get_contents($_FILES['fileToUpload']['tmp_name']));  
         $image = addslashes($_FILES['fileToUpload']['name']); 
+
        
     }
     $imgField = 'image';

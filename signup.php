@@ -255,9 +255,9 @@ if(isset($_POST["Submit"]))
 			
 		</fieldset>
 		<div class="message">
-			<a class="login" href="../stsproject/login.php"><?=$successMessage?></a>  
+			<a class="login" href="../sts/login.php"><?=$successMessage?></a>  
 			<br>
-			<a class="login" href="../stsproject/login.php">LOGIN</a>
+			<a class="login" href="../sts/login.php">LOGIN</a>
 			<i class="fa fa-long-arrow-right"></i>
 
 		</div>	
