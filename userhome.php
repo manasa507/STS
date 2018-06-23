@@ -163,7 +163,7 @@ if(isset($_POST["name"])){
     <div class="row">
       <div class="col-md-3">
           <div class="card" >
-              <img class="card-img-top" src="assets/img/avatar.png" alt="Card image" >
+              <img class="card-img-top" src="uploads/<?=$_SESSION["image"]?>" alt="Card image" >
                 <div class="card-body">
                   <h4 class="card-title"> <?= $_SESSION["name"]?>  </h4>
                   <hr>

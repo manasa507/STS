@@ -140,7 +140,7 @@
 			$dbConnectObject= new DatabaseConnection();
 			$dbConnectObject->conn;
 
-			$sql = "SELECT user.id AS id, user.name AS name, user.email AS email, user.password AS password, user.mobile AS mobile, user.isActive AS isActive, user.role AS role, dept.name AS deptName FROM user INNER JOIN dept ON user.deptId = dept.id WHERE email = '$emailId' AND password = '$password'";
+			$sql = "SELECT user.id AS id, user.name AS name, user.email AS email, user.password AS password, user.mobile AS mobile, user.isActive AS isActive, user.role AS role, dept.name AS deptName, user.image AS image FROM user INNER JOIN dept ON user.deptId = dept.id WHERE email = '$emailId' AND password = '$password'";
 
 			$result = mysqli_query($dbConnectObject->conn, $sql);
 
@@ -154,6 +154,7 @@
 	        		$_SESSION["id"] = $row["id"];
 	        		$_SESSION["mobile"] = $row["mobile"];
 	        		$_SESSION["deptName"] = $row['deptName'];
+	        		$_SESSION["image"] = $row['image'];
 	        	}
 
 	    		if ($isActive == 1 && $role == "user")
