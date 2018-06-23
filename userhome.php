@@ -167,7 +167,7 @@ if(isset($_POST["name"])){
                 <div class="card-body">
                   <h4 class="card-title"> <?= $_SESSION["name"]?>  </h4>
                   <hr>
-                  <i class="fa fa-mobile"> <?= $_SESSION["mobile"]?> </i>
+                  <i class="fa fa-phone"> <?= $_SESSION["mobile"]?> </i>
                   <hr>
                   <i class="fa fa-briefcase"> <?= $_SESSION["deptName"] ?></i>
                 </div>
