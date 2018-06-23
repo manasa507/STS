@@ -1,0 +1,119 @@
+
+.loginadmin{
+
+  background: url('../img/bg-1.jpg') no-repeat center fixed;
+
+  background-size: cover;
+
+}
+
+.loginform{
+
+    border: 1px solid #B0B6BE;
+    
+    background: rgba(213,215,222,0.9);
+
+    max-width: 350px;
+
+    margin: 200px auto 0;
+
+}
+
+.loginform .lockicon{
+
+    font-size: 50px;
+
+}
+
+.loginform .input-group-addon{
+
+    padding: 6px 12px;
+
+    font-size: 16px;
+
+    color: #8b9199;
+
+    font-weight: normal;
+
+    line-height: 1;
+
+    text-align: center;
+
+    background-color: #ffffff;
+
+    border: none;
+
+    border-radius: 0;
+
+}
+.loginform .form-control {
+
+    position: relative;
+
+    font-size: 16px;
+
+    height: auto;
+
+    padding: 10px;
+
+}
+
+.loginform .input-group{
+
+    padding-bottom: 15px;
+
+}
+
+
+.loginform .checkbox {
+
+    margin-bottom: 14px;
+
+}
+
+.loginform input[type="text"], .loginform input[type="password"] 
+{
+
+    border: none;
+
+    border-radius: 0;
+
+}
+
+.loginform .btn{
+
+    border-radius: 0;
+
+}
+.loginform p {
+
+    text-align: center;
+    color: #34aadc;
+
+}
+
+.adminname{
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+
+
+}
+
+.loginblock{
+
+    padding: 20px;
+
+}
+
+.credits a
+{
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+span
+{
+    color: red;
+}

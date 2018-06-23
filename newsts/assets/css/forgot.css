@@ -1,0 +1,108 @@
+
+body
+{
+
+background-color: gray;
+
+}
+
+.emailform, .reset
+{
+
+    border: 1px solid #B0B6BE;
+    
+    background: rgba(213,215,222,0.9);
+
+    max-width: 350px;
+
+    margin: 200px auto 0;
+    
+    padding: 20px;
+
+
+}
+.reset .lockicon{
+
+    font-size: 50px;
+
+}
+
+
+.emailform .input-group-addon,.reset .input-group-addon
+{
+
+    padding: 6px 12px;
+
+    font-size: 16px;
+
+    color: #8b9199;
+
+    font-weight: normal;
+
+    line-height: 1;
+
+    text-align: center;
+
+    background-color: #ffffff;
+
+    border: none;
+
+    border-radius: 0;
+
+}
+.emailform .form-control, .reset .form-control 
+ {
+
+    position: relative;
+
+    font-size: 16px;
+
+    height: auto;
+
+    padding: 10px;
+
+}
+
+.emailform .input-group,.reset .input-group
+{
+
+    padding-bottom: 15px;
+
+}
+
+
+.emailform input[type="text"],.reset input[type="text"], .reset input[type="password"]
+{
+
+    border: none;
+
+    border-radius: 0;
+
+}
+
+.emailform .btn,.reset .btn
+{
+
+    border-radius: 0;
+
+}
+
+.emailname,.resetpassword
+{
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+
+
+}
+
+.reset p {
+
+    text-align: center;
+    color: #34aadc;
+
+}
+span
+{
+    color: red;
+}
