@@ -213,13 +213,13 @@
 
 
 		/*
-			@author:Sridevi
-		    @desc to update password
-		    @param int $id
-		    @param string $password
-		    @param string $confirmPassword
-		    @param string $enteredToken
-		    @return string $matchErr
+		@author:Sridevi
+		@desc to update password
+		@param int $id
+		@param string $password
+		@param string $confirmPassword
+		@param string $enteredToken
+		@return string $matchErr
 		*/
 		public function passwordUpdation($id,$password,$confirmPassword,$enteredToken)
 		{

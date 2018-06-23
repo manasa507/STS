@@ -10,6 +10,7 @@
 	class Dept 
 	{	
 		/**
+		@author: Saimanasa
 		@ desc selectAll function for fetch all no.of records in a particular table.
 		@ return STRING $allRecords
 		**/
@@ -22,6 +23,7 @@
 			
 		}
 		/**
+		@author: Saimanasa
 		@ desc selectById function for fetch all no.of records in a table.
 		@ param  STRING $id 
 		@ return STRING $response
@@ -49,6 +51,7 @@
 		}
 		
 		/**
+		@author: Saimanasa
 		@ desc update function for update user formData.
 		@ param  STRING $formData 
 		@ param  int $id  
@@ -63,6 +66,7 @@
 		    return $query;
 		}
 		/**
+		@author: Saimanasa
 		@ desc insert function for insert user formData.
 		@ param  STRING $formData 
 		@ return STRING $response
@@ -76,6 +80,7 @@
         }
 
 		/*
+		@author: ramarao
         @desc select department
 		@returns array  $select 
 		*/
@@ -85,7 +90,7 @@
 		        $dbConnectObject= new DatabaseConnection();
 		        $dbConnectObject->conn;
 
-		        $sql = "SELECT id, name FROM dept";
+		        $sql = "SELECT id,name FROM dept";
 		        $result = mysqli_query($dbConnectObject->conn, $sql);
 		        $select = "";
 		        if (mysqli_num_rows($result) > 0) 

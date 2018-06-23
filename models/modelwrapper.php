@@ -10,6 +10,7 @@
 	class ModelWrapper
 	{
 		/**
+		@author: Saimanasa
 		@ desc selectAll function for fetch all no.of records in a particular table.
 		@ param STRING  $tableName 
 		@ param  STRING $columnName  
@@ -23,6 +24,7 @@
 			return $sql;
 		}
 		/**
+		@author: Saimanasa
 		@ desc selectById function for fetch all no.of records in a table.
 		@ param STRING  $tableName 
 		@ param  STRING $columnName
@@ -58,6 +60,7 @@
 			return $deleteQuery;
   		}
   		/**
+  		@author: Saimanasa
 		@ desc update function for update user Information.
 		@ param STRING  $tableName 
 		@ param  STRING $pager 
@@ -103,6 +106,7 @@
 		    return $query;
 		}
 		/**
+		@author: Saimanasa
 		@ desc insert function for insert users into users table. 
 		@ param STRING  $tableName 
 		@ param  STRING $formData  
@@ -125,6 +129,7 @@
 		
   		
   		/**
+  		@author: Saimanasa
 		@ desc numRows function for returns the number of rows in a result.
 		@ param STRING  $query 
 		@ return STRING $response
@@ -135,6 +140,7 @@
 		}
 
 		/**
+		@author: Saimanasa
 		@ desc fetchArray function for fetchs a result row as an associative array.
 		@ param STRING  $query 
 		@ return STRING $response
@@ -145,6 +151,7 @@
 		}
 		
   		/**
+  		@author: ramarao
         @ desc fetchAssoc function for Fetch a result row as an associative array
         @ param STRING  $deptObj 
         @ param STRING  $rowsObj 

@@ -11,6 +11,7 @@
 	class Categories 
 	{	
 		/**
+		@author: Saimanasa
 		@ desc selectAll function for fetch all no.of records in a particular table.
 		@ return STRING $allRecords
 		**/
@@ -23,6 +24,7 @@
 			
 		}
 		/**
+		@author: Saimanasa
 		@ desc selectById function for fetch all no.of records in a table.
 		@ param  STRING $id 
 		@ return STRING $response
@@ -49,6 +51,7 @@
         	return $response;
 		}
 		/**
+		@author: Saimanasa
 		@ desc update function for update user formData.
 		@ param  STRING $formData 
 		@ param  STRING $id  
@@ -63,6 +66,7 @@
 		    return $query;
 		}
 		/**
+		@author: Saimanasa
 		@ desc insert function for insert user formData.
 		@ param  STRING $formData 
 		@ return STRING $response
@@ -74,9 +78,11 @@
         	$query = $wrapperObj->insert($tableName, $formData);
         	return $query;
         }
-
-        //@desc selects multiple data from database
-	//@retruns the seleted data into an $catarray array 
+        /**
+        @author: Ramarao
+        @desc selects multiple data from database
+		@retruns the seleted data into an $catarray array 
+		**/
 	    public function selectCat()
 		{
 			$dbConnectObject= new DatabaseConnection();
@@ -102,28 +108,32 @@
 			mysqli_close($dbConnectObject->conn);
 			return $catArray;
 		}
+		/**
+        @author: Ramarao
+        @desc selects multiple data from database
+		@retrun STRING selects
+		**/
+		public function getCat()
+	    {
+	        $dbConnectObject= new DatabaseConnection();
+	        $dbConnectObject->conn;
 
-	public function getCat()
-    {
-        $dbConnectObject= new DatabaseConnection();
-        $dbConnectObject->conn;
+	        $sql = "SELECT id, deptId, name FROM categories";
+	        $result = mysqli_query($dbConnectObject->conn, $sql);
+	        $selects = "";
+	        if (mysqli_num_rows($result) > 0) 
+	        {
+	            
+	            while($row = mysqli_fetch_assoc($result)) {
+	                $selects.='<option value="'.$row['id'].'" data-val="'.$row['deptId'].'" >'.$row['name'].'</option>';
+	            }
 
-        $sql = "SELECT id, deptId, name FROM categories";
-        $result = mysqli_query($dbConnectObject->conn, $sql);
-        $selects = "";
-        if (mysqli_num_rows($result) > 0) 
-        {
-            
-            while($row = mysqli_fetch_assoc($result)) {
-                $selects.='<option value="'.$row['id'].'" data-val="'.$row['deptId'].'" >'.$row['name'].'</option>';
-            }
-
-       } 
-        else 
-        {
-            echo  mysqli_error($dbConnectObject->conn);;
-        }
-        return $selects;
-    }
+	       } 
+	        else 
+	        {
+	            echo  mysqli_error($dbConnectObject->conn);;
+	        }
+	        return $selects;
+	    }
 	}
 ?>

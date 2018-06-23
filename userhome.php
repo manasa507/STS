@@ -1,18 +1,17 @@
 <?php
-// echo "mmm";
-// die;
+
 require_once('models/ticket.php');
+require_once 'models/modelwrapper.php';
 $tableData = "";
 $ticketObject = new Ticket();
+$wrapperObj = new ModelWrapper();
 $tableData = $ticketObject->getTicket();
 require_once('models/dept.php');
 require_once('models/categories.php');
 $deptObj = new Dept();
 $select = $deptObj->getDept();
-
 $catObj= new Categories();
 $selects = $catObj->getCat();
-
 $statusMsg = "";
 
 if(isset($_POST["Submit"]))
