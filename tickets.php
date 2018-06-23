@@ -18,6 +18,7 @@
     <link href="assets/css/elegant-icons-style.css" rel="stylesheet"/>
     <!-- Custom styles -->
     <link href="assets/css/admin.css" rel="stylesheet">
+    <link href="assets/css/admineff.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet"/>
   </head>
   <body onload= "myfun()">
@@ -77,75 +78,159 @@
         $rowsObj = $modelObj->numRows($fetchCategory);
         $selectCategory = $modelObj->fetchAssoc($fetchCategory,$rowsObj);
     ?>
+    <!-- container section start -->
+    <section id="container">
+        <!--header start-->
+        <header class="header dark-bg">
+          <div class="toggle-nav" >
+            <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" id="toggle"  data-placement="bottom"><a href='javascript:'><i class="icon_menu"  ></i></a></div>
+          </div>
+
+          <!--logo start-->
+          <a href="#" class="logo">SUPPORT TICKET SYSTEM</a>
+          <!--logo end-->
+          
+          <div class="top-nav notification-row">
+            <!-- user login dropdown start-->
+            <ul>
+              <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  <span class="profile-ava">
+                    <img class ="adminimg" alt="adminimg" src="assets/img/logo.png">
+                  </span>
+                  <span class="username">ADMIN</span>
+                  <b class="caret"></b>
+                </a>
+                <!-- drop down profile -->
+                <ul class="dropdown-menu extendedut">
+                  <div class="log-arrow-up"></div>
+                  <li>
+                    <a href="logout.php"><i class="arrow_carrot-right_alt2"></i> Log Out</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <!-- user login dropdown end -->
+          </div>
+        </header>
+        <!--header end-->
+
+        <!--sidebar start-->
+        <aside>
+          <div id="sidebar"  class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu">
+              <li>
+                <a href="admin.php">
+                  <i class="icon_house_alt"></i>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+             
+             <li>
+                <a href="users.php">
+                  <i class="icon_id"></i>     
+                  <span>Users</span>
+                </a>
+              </li>
+
+              <li>
+                <a href="deptinfo.php">
+                  <i class="icon_building"></i>
+                  <span>Department</span>
+                </a>
+              </li>
+
+               <li>
+                <a href="categories.php">
+                  <i class="icon_table"></i>
+                  <span>Category</span>
+                </a>
+              </li>
+
+                <li>
+                <a href="tickets.php">
+                  <i class="icon_documents_alt"></i>
+                  <span>Tickets</span>
+                </a>
+              </li>
+            </ul>
+            <!-- sidebar menu end-->
+          </div>
+        </aside>
+        <!--sidebar end-->
+
     <!--Department Table-->
-    <section id="container" >
-      <header class="header dark-bg"> 
-        <a href="admin.php" class="pull-left logo"><i class="icon_house_alt"></i>STS <span class="lite">Admin</span></a>
-      </header>
-      <div class="col-lg-offset-2 col-lg-9 col-lg-offset-1 col-md-12 col-xs-12">
-        <section class="card">
-          <header class="panel-heading">Tickets 
-            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#reg" href="#">ADD
-            <i class="icon_plus_alt2"></i></button>
-          </header>
-          <form action="<?php $_PHP_SELF?>" method="POST">
-            <table class="table table-striped table-advance table-hover" id="myTable">
-              <thead>
-                <tr>
-                  <th> S.NO</th>
-                  <th><i class="icon_profile"></i> Subject</th>
-                  <th><i class="icon_profile"></i> Description</th>
-                  <th><i class="icon_profile"></i> Status</th>
-                  <th><i class="icon_calendar"></i> Created At</th>
-                  <th><i class="icon_cogs"></i> ChangeStatus</th>
-                  <th><i class="icon_cogs"></i> Delete</th>
-                  <th><i class="icon_cogs"></i> Update</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                  $i=1;
-                  $noOfRows = $modelObj->numRows($allUsers);
-                  if( $noOfRows > 0)
-                  {
-                    while ($row = $modelObj->fetchArray($allUsers))
-                    {
-                      $status = $row['isActive'];
-                      if($status==0){
-                        $changeStatus = "activate";
+    <section id="main-content">
+      <section id="container" >
+        <div class="col-lg-12 col-md-12 col-xs-12">
+          <section class="card">
+            <header class="panel-heading">Tickets 
+              <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#reg" href="#">ADD
+              <i class="icon_plus_alt2"></i></button>
+            </header>
+              <div style="overflow-x:auto;">
+              <form action="<?php $_PHP_SELF?>" method="POST">
+                <table class="table table-striped table-advance table-hover" id="myTable">
+                  <thead>
+                    <tr>
+                      <th> S.NO</th>
+                      <th><i class="icon_profile"></i> Subject</th>
+                      <th><i class="icon_profile"></i> Description</th>
+                      <th><i class="icon_profile"></i> Status</th>
+                      <th><i class="icon_calendar"></i> Created At</th>
+                      <th><i class="icon_cogs"></i> ChangeStatus</th>
+                      <th><i class="icon_cogs"></i> Delete</th>
+                      <th><i class="icon_cogs"></i> Update</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      $i=1;
+                      $noOfRows = $modelObj->numRows($allUsers);
+                      if( $noOfRows > 0)
+                      {
+                        while ($row = $modelObj->fetchArray($allUsers))
+                        {
+                          $status = $row['isActive'];
+                          if($status==0){
+                            $changeStatus = "activate";
+                          }
+                          else{
+                            $changeStatus ="deactivate";
+                          }
+                          $id = $row['id'];
+                          echo "<tr>
+                            <td>".$i++."</td>
+                            <td>".$row['subject']."</td>
+                             <td>".$row['description']."</td>
+                             <td>".$row['isActive']."</td>
+                            <td>". date('F d, Y', strtotime($row['createdAt'])) . "</td>
+                            <div class='btn-group'>
+                                <td><button name='Submit' class='btn btn-default' value='$id'>$changeStatus</button>
+                                </td>
+                            </div>
+                            <div class='btn-group'>
+                                <td><a class='btn btn-danger' href='tickets.php?del={$row['id']}'><i class='icon_trash'></i>DELETE</a>
+                                </td>
+                            </div>
+                            <div class='btn-group'>
+                                <td><b><button><a href='tickets.php?update={$row['id']}'>UPDATE</a></button></b>
+                                </td>
+                            </div>
+                          </tr>";
+                        }
                       }
-                      else{
-                        $changeStatus ="deactivate";
-                      }
-                      $id = $row['id'];
-                      echo "<tr>
-                        <td>".$i++."</td>
-                        <td>".$row['subject']."</td>
-                         <td>".$row['description']."</td>
-                         <td>".$row['isActive']."</td>
-                        <td>". date('F d, Y', strtotime($row['createdAt'])) . "</td>
-                        <div class='btn-group'>
-                            <td><button name='Submit' class='btn btn-default' value='$id'>$changeStatus</button>
-                            </td>
-                        </div>
-                        <div class='btn-group'>
-                            <td><a class='btn btn-danger' href='tickets.php?del={$row['id']}'><i class='icon_trash'></i>DELETE</a>
-                            </td>
-                        </div>
-                        <div class='btn-group'>
-                            <td><b><button><a href='tickets.php?update={$row['id']}'>UPDATE</a></button></b>
-                            </td>
-                        </div>
-                      </tr>";
-                    }
-                  }
-                ?>  
-              </tbody>
-            </table>
-          </form>
-        </section>
-      </div>
+                    ?>  
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </section>
+        </div>
+      </section>
     </section>
+
     <!-- Add Tickets Modal -->
     <div class="modal fade" id="reg" tabindex="-1" role="dialog" >
       <div class="modal-dialog">
@@ -227,12 +312,12 @@
         });
       }
     </script>
-
+    <script src="assets/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/addticket.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
      <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+     <script src="assets/js/toggle.js" type="text/javascript"></script>    
     <!-- nicescroll -->
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
