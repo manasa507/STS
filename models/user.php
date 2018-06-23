@@ -1,11 +1,9 @@
 <?php
 /**
-   	@ desc Select class for all CRUD functionalities performs here.. 
+   	@ desc to perform all CRUD operations 
     @ PHP version: 7.1.15
     @ date: 11-06-2018
-    @ author: Saimanasa
-    **/
-
+      **/
 	require_once 'includes/dbconnect.php';
 	require_once 'includes/connection.php';
 	session_start();
@@ -13,12 +11,8 @@
 	
 	class User 
 	{
-		
-		
 		/**
-		@ desc selectAll function for fetch all no.of records in a particular table.
-		@ param STRING  $tableName 
-		@ param  STRING $columnName  
+		@ desc selectAll function for fetch all no.of records in a particular table. 
 		@ return STRING $allRecords
 		**/
 		public function selectAll(){
@@ -31,10 +25,8 @@
 		}
 		/**
 		@ desc selectById function for fetch all no.of records in a table.
-		@ param STRING  $tableName 
-		@ param  STRING $columnName
-		@ param  STRING $partRecrd is a field name
-		@ param  STRING $fieldValue is a record value
+		@ param  STRING $partRecrd 
+		@ param  int $id
 		@ return STRING $response
 		**/
 		public function selectById($partRecrd,$id){
@@ -47,9 +39,7 @@
 		/**
 		@ author: Sridevi
 		@ desc delete function for delete record by Id.
-		@ param STRING  $table 
 		@ param INT $id 
-		@ param STRING  $pager 
 		@ return STRING $response
 		**/	
 		public function delete($id){
@@ -62,7 +52,7 @@
 		/**
 		@ desc update function for update user formData.
 		@ param  STRING $formData 
-		@ param  STRING $id  
+		@ param  int $id  
 		@ return STRING $response
 		**/
 		public function update( $formData, $id)
@@ -106,9 +96,7 @@
 		
 		/*
 		@author: Sridevi
-		@desc to check login details of admin
-		@version PHP 7.0.29-1
-	    @desc selecting data
+		@desc to validate login details of admin
 	    @param string $userName
 	    @param string $password
 	    @return string $credErr
@@ -134,6 +122,13 @@
 	     		return $credErr;
 	      	}	
 		}
+
+		/*
+		@author: Ramarao
+		@desc validates the user credentials
+	    @param string $emailId
+	    @param string $password
+		*/
 
 		public function validation($emailId, $password) 
 		{
@@ -175,7 +170,12 @@
 			return $message;
 		}
 
-
+		/*
+		@author: Sridevi
+    	@desc to check email is valid or not
+    	@param string $email
+    	@return string $credErr
+  		*/
 		public function emailValidation($email) 
 		{
       
@@ -210,6 +210,7 @@
 
 
 		/*
+			@author:Sridevi
 		    @desc to update password
 		    @param int $id
 		    @param string $password
@@ -253,6 +254,18 @@
 		    }
 		}
 
+		/*
+			@author:Ramarao
+		    @desc inserting user data
+		    @param string $userName
+		    @param string $emailId
+		    @param string $password
+		    @param string $mobileNumber
+		    @param string $Gender
+		    @param int $deptId
+		    @param string $image
+		    @return string $successMessage
+		*/
 		public function insertDataFromForm($userName, $emailId, $password, $mobileNumber,$Gender, $deptId,$image)
 		{
 
