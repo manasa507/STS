@@ -275,6 +275,17 @@ if(isset($_POST["name"])){
        
       </div>
 
+<div class="footer">   
+    <div class="row">
+      <div class="col-md-6">
+          <p>&copy; 2018 Credencys Solutions Inc.</p>
+      </div>
+      <div class="col-md-6 text-right">
+        <a class="footerIcon" href="https://twitter.com/Credencys" title="Twitter"><i class="fa fa-twitter"></i></a>
+        <a class="footerIcon" href="https://www.facebook.com/credencys/" title="Facebook"><i class="fa fa-facebook"></i></a>
+        <a class="footerIcon" href="https://www.linkedin.com/company/credencys" title="linkedin"><i class="fa fa-linkedin"></i></a>
+       
+      </div>
     </div>
   </div>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
