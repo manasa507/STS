@@ -218,6 +218,7 @@
 
    <!--  UPDATE Modal  -->
      <?php
+      echo "<section id='main-content' > ";
       echo "<section id='container' >";
       echo "<div class='col-lg-offset-2 col-lg-9 col-lg-offset-1 col-xs-12'>";
       echo "<section class='card' style='size: 100px;'>";
@@ -246,6 +247,8 @@
       echo "</div>";
       echo "</section>";
       echo "</section>";
+      echo "</section>";
+
     ?>
 
       <!-- page end-->

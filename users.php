@@ -232,6 +232,7 @@
 
       <!-- Update Modal -->
       <?php
+        echo "<section id='main-content' > ";
         echo "<section id='container' >";
         echo "<div class='col-lg-offset-2 col-lg-9 col-lg-offset-1 col-xs-12'>";
         echo "<section class='card' style='size: 100px;'>";
@@ -241,7 +242,7 @@
           while ($row1 = $modelObj->fetchArray($query)) {
             echo "<div class='panel-body'>";
             echo "<form class='form align' method='post'>";
-            echo "<header class='panel-heading'>Update Categories</header>";
+            echo "<header class='panel-heading'>Update Users</header>";
             echo"<input class='input' type='hidden' name='id' value='{$row1['id']}' />";
             echo "<br />";
             echo "<label>" . "Name:" . "</label>" . "<br />";
@@ -264,6 +265,7 @@
           <Span>Data Updated Successfuly......!!</span></div>';
         }
         echo "</div>";
+        echo "</section>";
         echo "</section>";
         echo "</section>";
       ?>

@@ -84,7 +84,6 @@
 			$dbConnectObject= new DatabaseConnection();
 			$sql = "SELECT name FROM categories ";
 			$result = mysqli_query($dbConnectObject->conn, $sql);
-			
 			if (mysqli_num_rows($result) > 0) 
 			{
 				$i =0;
@@ -93,7 +92,6 @@
 	    			$catArray[i] = $row["name"];
 	        		$i++;
 	    		}
-	    		
 			}
 			else
 			{
@@ -122,8 +120,7 @@
 	            while($row = mysqli_fetch_assoc($result)) {
 	                $selects.='<option value="'.$row['id'].'" data-val="'.$row['deptId'].'" >'.$row['name'].'</option>';
 	            }
-
-	       } 
+	        } 
 	        else 
 	        {
 	            echo  mysqli_error($dbConnectObject->conn);;

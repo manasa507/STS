@@ -219,8 +219,9 @@
 
     <!-- UPDATE FORM-->
     <?php
+      echo "<section id='main-content' > ";
       echo "<section id='container' >";
-      echo "<div class='col-lg-offset-2 col-lg-9 col-lg-offset-1 col-xs-12'>";
+      echo "<div class=' col-lg-10 col-lg-offset-2 col-xs-12'>";
       echo "<section class='card' style='size: 100px;'>";
     
       if (isset($_GET['update'])) {
@@ -246,6 +247,7 @@
         <Span>Data Updated Successfuly......!!</span></div>';
       }
       echo "</div>";
+      echo "</section>";
       echo "</section>";
       echo "</section>";
     ?>
