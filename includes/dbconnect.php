@@ -18,7 +18,7 @@ public $conn;
 public function __construct() 
 	{
 	// Create connection
-	$this->conn = mysqli_connect('localhost', 'root', 'Credencys', 'sts');
+	$this->conn = mysqli_connect('localhost', 'root', '123', 'sts');
 
 		if (!$this->conn) 
 			{
