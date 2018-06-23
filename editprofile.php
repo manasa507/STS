@@ -17,49 +17,81 @@
     $email =  $rows['email'];
     $mobile =  $rows['mobile'];
     $password =  $rows['password'];
-    $profilePicture =  $rows['image'];
-    $_SESSION['$image'] = $profilePicture;
+    $picture =  $rows['picture'];
+    $_SESSION['$picture'] = $picture;
     $dp = $_SESSION['$image'];
+
     if (isset($_POST['submit']))
     {
         $mobileNo = $_POST['mobile'];
         $oldPass = $_POST['password'];
         $newPassword = $_POST['newPassword'];
         $re_pass = $_POST['re_password'];
-        
-        if(isset($_FILES["image"]))
+     if(isset($_FILES["fileToUpload"]))
+    {
+      $target_dir = "uploads/";
+      $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+      $uploadOk = 1;
+      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+      // Check if image file is a actual image or fake image
+      if(isset($_POST["submit"])) 
+      {
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if($check !== false) 
         {
-            $target_dir = "uploads/";
-            $target_file = $target_dir . basename($_FILES["image"]["name"]);
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-            // Check if image file is a actual image or fake image
-            if(isset($_POST["submit"])) 
-            {
-                $check = getimagesize($_FILES["image"]["tmp_name"]);
-                if($check !== false) 
+          echo "File is an image - " . $check["mime"] . ".";
+          $uploadOk = 1;
+        } 
+        else 
+        {
+          echo "File is not an image.";
+          $uploadOk = 0;
+        }
+      }
+
+      // Allow certain file formats
+      if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+      && $imageFileType != "gif" ) 
+      {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+      }
+      // Check if $uploadOk is set to 0 by an error
+      if ($uploadOk == 0) 
+      {
+        echo "Sorry, your file was not uploaded.";
+      // if everything is ok, try to upload file
+      } 
+      else 
+      {
+        if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
+        {
+          echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        } 
+        else 
+        {
+          echo "Sorry, there was an error uploading your file.";
+        }
+      }
+      if(isset($_FILES["fileToUpload"]))  
+      {
+        $fileToUpload = addslashes(file_get_contents($_FILES['fileToUpload']['tmp_name']));  
+        $image = addslashes($_FILES['fileToUpload']['name']); 
+       
+    }
+    $imgField = 'image';
+                if(!empty($image))
                 {
-                    echo "File is an image - " . $check["mime"] . ".";
-                    $uploadOk = 1;
-                } 
-            }                                                              
-            else 
-            {
-                if(move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) 
+                    $userObj->update($imgField,$image,$email); 
+                    echo "<script>alert('Update Sucessfully'); window.location='editprofile.php'</script>";  
+                }
+                else{
                 {
-                    echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
-                } 
-                else 
-                {
-                  echo "Sorry, there was an error uploading your file.";
+                    $userObj->update($imgField,$dp,$email); 
+                    echo "<script>alert('Update Sucessfully'); window.location='editprofile.php'</script>";  
                 }
             }
-            if(isset($_FILES["image"]))  
-            {
-                $fileToUpload = addslashes(file_get_contents($_FILES['image']['tmp_name']));  
-                $image = addslashes($_FILES['fileToUpload']['name']); 
-            }
-        }
+
         $rows = $userObj->numRows($sql);
     
         if ($rows != 0) 
@@ -89,11 +121,7 @@
                      echo "<script>alert('should contain alphabets,numbers and min of 6 charaters'); window.location='editprofile.php'</script>";
                     }
                 }
-                $imgField = 'image';
-                if(!empty($image))
-                {
-                    $userObj->update($imgField,$image,$email); 
-                    echo "<script>alert('Update Sucessfully'); window.location='editprofile.php'</script>";  
+                
                 }
                 if($mobileNo != $mobile){
                     if (preg_match("/^(?=.*\d).{10}$/", $mobileNo))
@@ -116,6 +144,7 @@
             }
         }
     }
+    
 ?>
 <!DOCTYPE html>
     <head>
@@ -170,16 +199,18 @@
                                             $files = glob("uploads/*.*");
                                             for ($i=0; $i<count($files); $i++)
                                             {   
-                                                $num = $files[$i];
-                                                if($files[$i] == "uploads/".$profilePicture)
+                                              $num = $files[$i];
+                                             
+                                              if($files[$i] == "uploads/".$picture)
                                                 {
-                                                    echo '<img src="'.$num.'" alt="random image">'."&nbsp;&nbsp;";
+                                                echo '<img src="'.$num.'" alt="random image">'."&nbsp;&nbsp;";
                                                 }
                                             }
                                         ?>  
                                         <span class="glyphicon glyphicon-camera" id="PicUpload"></span>
+                                    
+                                        <input type="file" id="image-input" onchange="readURL(this);" accept="image/*" name="fileToUpload" value="$picture" class="form-control form-input Profile-input-file" disabled>
                                     </div>
-                                    <input type="file" id="image-input" onchange="readURL(this);" accept="image/*" name="image" class="form-control form-input Profile-input-file" disabled>
                                     <div class="col-lg-12">
                                         <a href="#" onclick="show('pswrd')" >
                                             <h4 class="text-right col-lg-12">
