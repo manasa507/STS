@@ -64,7 +64,7 @@
 		@ desc update function for update user Information.
 		@ param STRING  $tableName 
 		@ param  STRING $pager 
-		@ param  STRING $formData 
+		@ param  ARRAY $formData 
 		@ param  STRING $whereClauseClause 
 		@ return STRING $query
 		**/
@@ -109,7 +109,7 @@
 		@author: Saimanasa
 		@ desc insert function for insert users into users table. 
 		@ param STRING  $tableName 
-		@ param  STRING $formData  
+		@ param  ARRAY $formData  
 		@ return STRING $query
 		**/
 		function insert($tableName, $formData)
