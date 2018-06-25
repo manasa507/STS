@@ -16,7 +16,7 @@
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             echo "Invalid Email.......";
       }
-      else if(!preg_match( '/[^A-Za-z0-9]+/', $password)){
+      else if(!preg_match("/^(?=.*\d)(?=.*[a-zA-Z]).{6,10}$/", $password)){
             echo "Password should be alphanumeric.......";
       }
 

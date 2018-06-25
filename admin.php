@@ -32,14 +32,10 @@
        @ author: Saimanasa
       */
       
-      require "models/user.php";
-      require "models/ticket.php";
+      require_once "models/user.php";
+      require_once "models/ticket.php";
       require_once 'models/modelwrapper.php';
       // Here Parameters Declaration for fetch all table records ... 
-      $ticketTable = 'ticket';
-      $userTable = 'user';
-      $allCol = '*';
-      $statusField = 'isActive';
       $partRecrd = 'isActive';
       $statusClose = '0';
       $statusOpen = '1';
@@ -55,7 +51,6 @@
       // fetch all no.of users
       $all = $fetchAllUser->selectById($roleRecrd,$roleValue);
       $allUsers = $modelObj->numRows($all);
-      $statusField = 'isActive';
       // fetch all no.of opentickets 
       $open= $fetchAllTicket->selectById($partRecrd,$statusOpen);
       $openTickets  = $modelObj->numRows($open);

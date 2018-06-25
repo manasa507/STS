@@ -79,33 +79,6 @@
         	return $query;
         }
 
-		/*
-		@author: ramarao
-        @desc select department
-		@returns array  $select 
-		*/
-		 
-		public function getDept()
-		    {
-		        $dbConnectObject= new DatabaseConnection();
-		        $dbConnectObject->conn;
-
-		        $sql = "SELECT id,name FROM dept";
-		        $result = mysqli_query($dbConnectObject->conn, $sql);
-		        $select = "";
-		        if (mysqli_num_rows($result) > 0) 
-		        {
-		            while($row = mysqli_fetch_assoc($result)) {
-		                $select.='<option value="'.$row['id'].'">'.$row['name'].'</option>';
-		                $x = $row['id'];
-		            }
-		        } 
-		        else 
-		        {
-		            echo  mysqli_error($dbConnectObject->conn);;
-		        }
-		        return $select;
-		    }
 	}
 
 ?>

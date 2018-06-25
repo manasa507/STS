@@ -44,7 +44,7 @@
       if(isset($_POST['Submit']))
       {
         $id =$_POST['Submit'];
-        $status = $ticketObj->selectById("isActive",$id);
+        $status = $ticketObj->selectById("id",$id);
         while($row = $modelObj->fetchArray($status))
         {
           $status = $row['isActive'];
@@ -274,7 +274,7 @@
       echo "<section class='card' style='size: 100px;'>";
       if (isset($_GET['update'])) {
         $update = $_GET['update'];
-        $query = $ticketObj->selectById("*",$update);
+        $query = $ticketObj->selectById("id",$update);
         while ($row = $modelObj->fetchArray($query)) {
           echo "<div class='panel-body'>";
           echo "<form class='form align' method='post'>";

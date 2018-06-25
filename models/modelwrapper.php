@@ -6,7 +6,7 @@
     @ date: 11-06-2018
     **/
     session_start();
-    require_once 'includes/connection.php';
+    require_once 'includes/dbconnect.php';
 	class ModelWrapper
 	{
 		/**
@@ -18,7 +18,7 @@
 		**/
 		public function selectAll($tableName,$columnName){
 
-			$dbConnectObject = new DatabaseConnection('localhost','root','123','sts');
+			$dbConnectObject = new DatabaseConnection();
 			$dbConnectObject->conn;
 			$sql = mysqli_query($dbConnectObject->conn, "SELECT $columnName FROM $tableName");
 			return $sql;
@@ -34,7 +34,7 @@
 		**/
 		public function selectById($tableName,$columnName,$partRecrd,$id){
 
-			$dbConnectObject = new DatabaseConnection('localhost','root','123','sts');
+			$dbConnectObject = new DatabaseConnection();
 			$dbConnectObject->conn;
 		
 			$sql = mysqli_query($dbConnectObject->conn, "SELECT $columnName FROM $tableName where $partRecrd = '$id'");
@@ -50,7 +50,7 @@
 		@ return STRING $deleteQuery
 		**/	
 		public function delete($table,$id,$pager){
-			$dbConnectObject= new DatabaseConnection('localhost','root','123','sts');
+			$dbConnectObject= new DatabaseConnection();
 			$dbConnectObject->conn;
      		//SQL query for deletion.
 			$deleteQuery = mysqli_query($dbConnectObject->conn,"DELETE from $table where id=$id");
@@ -71,7 +71,7 @@
 		function update($tableName, $pager ,$formData, $whereClause='$id')
 		{
 
-			$dbConnectObject= new DatabaseConnection('localhost','root','123','sts');
+			$dbConnectObject= new DatabaseConnection();
 			$dbConnectObject->conn;
 		    // check for optional where clause
 		    $whereSQL = '';
@@ -114,7 +114,7 @@
 		**/
 		function insert($tableName, $formData)
 		{
-			$dbConnectObject= new DatabaseConnection('localhost','root','123','sts');
+			$dbConnectObject= new DatabaseConnection();
 			$dbConnectObject->conn;
 		    // retrieve the keys of the array (column titles)
 		    $fields = array_keys($formData);
@@ -159,7 +159,7 @@
         **/
         public function fetchAssoc($deptObj,$rowsObj)
         {
-            $dbConnectObject= new DatabaseConnection('localhost','root','123','sts');
+            $dbConnectObject= new DatabaseConnection();
             $dbConnectObject->conn;
 			$select ="";
             if ($rowsObj > 0) 

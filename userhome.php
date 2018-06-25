@@ -1,17 +1,25 @@
 <?php
 
 require_once('models/ticket.php');
-require_once 'models/modelwrapper.php';
+require_once ('models/modelwrapper.php');
+require_once('models/dept.php');
+require_once('models/categories.php');
 $tableData = "";
 $ticketObject = new Ticket();
 $wrapperObj = new ModelWrapper();
 $tableData = $ticketObject->getTicket();
-require_once('models/dept.php');
-require_once('models/categories.php');
+
 $deptObj = new Dept();
-$select = $deptObj->getDept();
+$fetchDept = $deptObj->selectAll();
+$rowDept = $wrapperObj->numRows($fetchDept);
+$selectDept = $wrapperObj->fetchAssoc($fetchDept,$rowDept);
+//$select = $deptObj->getDept();
 $catObj= new Categories();
-$selects = $catObj->getCat();
+$fetchCategory = $catObj->selectAll();
+$rowCategory = $wrapperObj->numRows($fetchCategory);
+$selectCategory = $catObj->fetchAssoc($fetchCategory,$rowCategory);
+// $catObj= new Categories();
+// $selectCategory = $catObj->getCat();
 $statusMsg = "";
 
 if(isset($_POST["Submit"]))
@@ -194,7 +202,7 @@ if(isset($_POST["name"])){
                         <div class="col-md-12">
                             <select class="form-control" id="deptSel" name="deptSel[]" required="required">
                                   <option value="0"> --Select Department-- </option>
-                                  <?= $select ?>
+                                  <?= $selectDept ?>
                               </select>
                         </div>
                       </div>
@@ -202,7 +210,7 @@ if(isset($_POST["name"])){
                         <div class="col-md-12">
                             <select required="required" class="form-control" id="catSel" name="catSel[]" >
                                   <option value="" data-val = "0"> --select Category-- </option>
-                                  <?= $selects ?>
+                                  <?= $selectCategory ?>
                               </select>
                         </div>
                       </div>

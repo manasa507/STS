@@ -78,62 +78,31 @@
         	$query = $wrapperObj->insert($tableName, $formData);
         	return $query;
         }
-        /**
-        @author: Ramarao
-        @desc selects multiple data from database
-		@retruns the seleted data into an $catarray array 
-		**/
-	    public function selectCat()
-		{
-			$dbConnectObject= new DatabaseConnection();
-			$sql = "SELECT name FROM categories ";
-			$result = mysqli_query($dbConnectObject->conn, $sql);
-			
-			if (mysqli_num_rows($result) > 0) 
-			{
-	    	// output data of each row
-				$i =0;
-	    		while($row = mysqli_fetch_assoc($result)) 
-	    		{	
-	    			$catArray[i] = $row["name"];
-	        		$i++;
-	    		}
-	    		
-			}
-			else
-			{
-	    		echo "0 results";
-			}
+     
 
-			mysqli_close($dbConnectObject->conn);
-			return $catArray;
-		}
-		/**
-        @author: Ramarao
-        @desc selects multiple data from database
-		@retrun STRING selects
-		**/
-		public function getCat()
-	    {
-	        $dbConnectObject= new DatabaseConnection();
-	        $dbConnectObject->conn;
-
-	        $sql = "SELECT id, deptId, name FROM categories";
-	        $result = mysqli_query($dbConnectObject->conn, $sql);
-	        $selects = "";
-	        if (mysqli_num_rows($result) > 0) 
-	        {
-	            
-	            while($row = mysqli_fetch_assoc($result)) {
-	                $selects.='<option value="'.$row['id'].'" data-val="'.$row['deptId'].'" >'.$row['name'].'</option>';
-	            }
-
-	       } 
-	        else 
-	        {
-	            echo  mysqli_error($dbConnectObject->conn);;
-	        }
-	        return $selects;
-	    }
+	    /**
+  		@author: ramarao
+        @ desc fetchAssoc function for Fetch a result row as an associative array
+        @ param STRING  $catObj 
+        @ param STRING  $rowsObj 
+        @ return STRING $selects
+        **/
+		public function fetchAssoc($catObj,$rowsObj)
+        {
+            $dbConnectObject= new DatabaseConnection();
+            $dbConnectObject->conn;
+			$selects ="";
+            if ($rowsObj > 0) 
+            {
+                while($row = mysqli_fetch_assoc($catObj)) {
+                     $selects.='<option value="'.$row['id'].'" data-val="'.$row['deptId'].'" >'.$row['name'].'</option>';
+                }
+            } 
+            else 
+            {
+                echo  mysqli_error($dbConnectObject->conn);;
+            }
+            return $selects;
+        }
 	}
 ?>

@@ -5,7 +5,6 @@
     @ date: 11-06-2018
       **/
 	require_once 'includes/dbconnect.php';
-	require_once 'includes/connection.php';
 	require_once 'models/modelwrapper.php';
 	session_start();
 	

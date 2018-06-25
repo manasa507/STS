@@ -7,7 +7,6 @@
     **/
     session_start();
 
-	require_once 'includes/connection.php';
 	require_once 'includes/dbconnect.php';
 	require_once 'models/modelwrapper.php';
 
@@ -33,10 +32,10 @@
 		@ param  int $id
 		@ return STRING $response
 		**/
-		public function selectById($columnName,$id){
+		public function selectById($partRecrd,$id){
 
 			$tableName = 'ticket';
-			$partRecrd = 'id';
+			$columnName = '*';
 			$wrapperObj = new ModelWrapper();
         	$response = $wrapperObj->selectById($tableName,$columnName,$partRecrd,$id);
         	return $response;

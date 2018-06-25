@@ -113,7 +113,7 @@ if(isset($_POST["Submit"]))
 	    	$image_name = addslashes($_FILES['fileToUpload']['name']);  
 	    }
 		
-		$target_dir = "../stsproject/uploads/";  
+		$target_dir = "../sts/uploads/";  
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 		// $check = true;
 		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -121,8 +121,8 @@ if(isset($_POST["Submit"]))
 
 
     	
-    	$ram = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    	if($ram !== false) {
+    	$size = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    	if($size !== false) {
         	// echo "File is an image - " . $ram["mime"] . ".";
         	$check = true;
     	} else {
