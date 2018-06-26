@@ -230,7 +230,7 @@
         </section>
       </section>
 
-      <!-- Update Modal -->
+      <!-- Update Form -->
       <?php
         echo "<section id='main-content' > ";
         echo "<section id='container' >";

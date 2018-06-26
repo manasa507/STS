@@ -7,7 +7,6 @@ var mobile = $("#mobileNumber").val();
 var password = $("#password").val();
 var cpassword = $("#confirmPassword").val();
 var gender = $("input[name='gender']:checked").val();
-// var gender = $("#gen").val();
 var dept = $("#dept").val();
 var role = $("#role").val();
 if (name == '' || email == '' || mobile == '' || password == '' || cpassword == '' || gender == '' || dept == '' ||  role == '') {
