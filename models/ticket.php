@@ -57,7 +57,7 @@
 		/**
 		@author: Saimanasa
 		@ desc update function for update user formData.
-		@ param  STRING $formData 
+		@ param  ARRAY $formData 
 		@ param  STRING $id  
 		@ return STRING $response
 		**/
@@ -71,7 +71,7 @@
 		/**
 		@author: Saimanasa
 		@ desc insert function for insert user formData.
-		@ param  STRING $formData 
+		@ param  ARRAY $formData 
 		@ return STRING $response
 		**/
 		function insert($formData)

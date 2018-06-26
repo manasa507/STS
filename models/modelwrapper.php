@@ -64,10 +64,11 @@
 		@ desc update function for update user Information.
 		@ param STRING  $tableName 
 		@ param  STRING $pager 
-		@ param  STRING $formData 
-		@ param  STRING $whereClauseClause 
+		@ param  ARRAY $formData 
+		@ param  STRING $whereClause 
 		@ return STRING $query
 		**/
+
 		function update($tableName, $pager ,$formData, $whereClause='$id')
 		{
 
@@ -81,7 +82,7 @@
 		        if(substr(strtoupper(trim($whereClause)), 0, 5) != 'WHERE')
 		        {
 		            // not found, add key word
-		            $whereSQL = " WHERE ".$whereClause;
+		            $whereSQL = " WHERE".$whereClause;
 		        } else
 		        {
 		            $whereSQL = " ".trim($whereClause);
@@ -109,7 +110,7 @@
 		@author: Saimanasa
 		@ desc insert function for insert users into users table. 
 		@ param STRING  $tableName 
-		@ param  STRING $formData  
+		@ param  ARRAY $formData  
 		@ return STRING $query
 		**/
 		function insert($tableName, $formData)
