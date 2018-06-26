@@ -31,7 +31,8 @@
       $deptObj = new Dept();
       $modelObj = new ModelWrapper();
       $allCategory = $categoryObj->selectAll();
-      if (isset($_GET['del'])) {
+      if (isset($_GET['del'])) 
+      {
         $delId = $_GET['del'];
         $records = $categoryObj->delete($delId);
       }
@@ -221,7 +222,7 @@
     <?php
       echo "<section id='main-content' > ";
       echo "<section id='container' >";
-      echo "<div class=' col-lg-10 col-lg-offset-2 col-xs-12'>";
+      echo "<div class=' col-lg-12 col-xs-12'>";
       echo "<section class='card' style='size: 100px;'>";
     
       if (isset($_GET['update'])) {
@@ -236,7 +237,6 @@
           echo "<label>" . "Name:" . "</label>" . "<br />";
           echo"<input class='input form-control' type='text' name='cname' value='{$row['name']}' />";
           echo "<br />";
-          
           echo "<input class='submit' type='submit' name='submit' value='update' />";
           echo "</form>";
           echo "</div>";

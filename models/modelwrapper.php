@@ -65,9 +65,10 @@
 		@ param STRING  $tableName 
 		@ param  STRING $pager 
 		@ param  ARRAY $formData 
-		@ param  STRING $whereClauseClause 
+		@ param  STRING $whereClause 
 		@ return STRING $query
 		**/
+
 		function update($tableName, $pager ,$formData, $whereClause='$id')
 		{
 
@@ -81,7 +82,7 @@
 		        if(substr(strtoupper(trim($whereClause)), 0, 5) != 'WHERE')
 		        {
 		            // not found, add key word
-		            $whereSQL = " WHERE ".$whereClause;
+		            $whereSQL = " WHERE".$whereClause;
 		        } else
 		        {
 		            $whereSQL = " ".trim($whereClause);

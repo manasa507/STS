@@ -246,8 +246,8 @@
             echo"<input class='input' type='hidden' name='id' value='{$row1['id']}' />";
             echo "<br />";
             echo "<label>" . "Name:" . "</label>" . "<br />";
-            echo"<input class='input form-control' type='text' name='name' value='{$row1['name']}' />";
-            echo "<br />";
+            echo"<input class='input form-control' type='text' name='name' value='{$row1['name']}'/>";
+            echo "<br/>";
             echo "<label>" . "Email:" . "</label>" . "<br />";
             echo"<input class='input form-control' type='text' name='email' value='{$row1['email']}' />";
             echo "<br />";
